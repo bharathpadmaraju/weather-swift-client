@@ -25,4 +25,7 @@ class MockWeatherService: WeatherService {
             completion(.failure(error404))
         }
     }
+    func getAuthToken() {
+
+    }
 }
