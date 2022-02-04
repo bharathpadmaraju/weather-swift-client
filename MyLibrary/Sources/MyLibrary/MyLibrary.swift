@@ -17,7 +17,8 @@ public class MyLibrary {
         }
         // Fetch the current weather from the backend.
         // If the current temperature, in Farenheit, contains an 8, then that's lucky.
-        weatherService.getAuthToken()
+        //weatherService.getAuthToken()
+        
         weatherService.getTemperature { response in
             switch response {
             case let .failure(error):

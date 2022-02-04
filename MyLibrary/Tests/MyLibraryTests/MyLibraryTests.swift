@@ -6,7 +6,7 @@ final class MyLibraryTests: XCTestCase {
         // Given
 
         let myLibrary = MyLibrary()
-        let number = 8
+        let number = 2
         let expectation = XCTestExpectation(description: "We asked about the number 8 and heard back 🎄")
         var isLuckyNumber: Bool?
 
