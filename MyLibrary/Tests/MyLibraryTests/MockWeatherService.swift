@@ -25,7 +25,6 @@ class MockWeatherService: WeatherService {
             completion(.failure(error404))
         }
     }
-    func getAuthToken(completion: @escaping (_ authToken: String) -> Void) -> Void{
-
-    }
+    func getAuthToken(completion: @escaping (_ authToken: String) -> Void) -> Void{}
+    func getGreeting(completion: @escaping (_ response: Result<String, Error>) -> Void) {}
 }

@@ -3,6 +3,7 @@ import Foundation
 
 public protocol WeatherService {
     func getTemperature(completion: @escaping (_ response: Result<Int /* Temperature */, Error>) -> Void)
+    func getGreeting(completion: @escaping (_ response: Result<String, Error>) -> Void)
     func getAuthToken(completion: @escaping (_ authToken: String) -> Void)
 }
 
@@ -71,6 +72,29 @@ class WeatherServiceImpl: WeatherService {
 
         })
     }
+
+
+    func getGreeting(completion: @escaping (_ response: Result<String /* Temperature */, Error>) -> Void) {
+        self.getAuthToken(completion: { authToken in
+            let headers : HTTPHeaders = ["Authorization": "Bearer \(authToken)"]
+            AF.request(self.urlHello, method: .get, headers: headers)
+                .debugLog()
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of: Greeting.self) { response in
+                
+                switch response.result {
+                case let .success(hello):
+                    let message = hello.greeting 
+                    print(message)
+                    completion(.success(message))
+    
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+
+        })
+    }
 }
 
 private struct Weather: Decodable {
@@ -84,4 +108,8 @@ private struct Weather: Decodable {
 
 private struct Token: Decodable {
     let accessToken: String
+}
+
+private struct Greeting: Decodable {
+    let greeting: String
 }

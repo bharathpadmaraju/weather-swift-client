@@ -19,6 +19,17 @@ public class MyLibrary {
         // If the current temperature, in Farenheit, contains an 8, then that's lucky.
         //weatherService.getAuthToken()
         
+        weatherService.getGreeting { response in
+            switch response {
+            case let .failure(error):
+                print(error)
+                completion(nil)
+            case let .success(message):
+                print(message)
+                completion(true)
+            }
+        }
+        
         weatherService.getTemperature { response in
             switch response {
             case let .failure(error):
