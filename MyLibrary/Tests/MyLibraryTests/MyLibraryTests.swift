@@ -2,6 +2,30 @@ import XCTest
 import MyLibrary
 
 final class MyLibraryTests: XCTestCase {
+    
+    func testHello() throws {
+        // Given
+
+        let myLibrary = MyLibrary()
+        let expectation = XCTestExpectation(description: "We asked about the hello and heard back 🎄")
+        var isHello: Bool?
+
+        // When
+        myLibrary.isHello(completion: { lucky in
+            isHello = lucky
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 5)
+
+        // Then
+        XCTAssertNotNil(isHello)
+        XCTAssert(isHello == true)
+    }
+    
+    
+    
+    
     func testIsLuckyBecauseWeAlreadyHaveLuckyNumber() throws {
         // Given
 

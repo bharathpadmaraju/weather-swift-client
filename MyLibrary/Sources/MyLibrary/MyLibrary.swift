@@ -8,17 +8,10 @@ public class MyLibrary {
     public init(weatherService: WeatherService? = nil) {
         self.weatherService = weatherService ?? WeatherServiceImpl()
     }
-
-    public func isLucky(_ number: Int, completion: @escaping (Bool?) -> Void) {
+    
+    
+    public func isHello(completion: @escaping (Bool?) -> Void) {
         // Check the simple case first: 3, 5 and 8 are automatically lucky.
-        if number == 3 || number == 5 || number == 8 {
-            completion(true)
-            return
-        }
-        // Fetch the current weather from the backend.
-        // If the current temperature, in Farenheit, contains an 8, then that's lucky.
-        //weatherService.getAuthToken()
-        
         weatherService.getGreeting { response in
             switch response {
             case let .failure(error):
@@ -29,6 +22,20 @@ public class MyLibrary {
                 completion(true)
             }
         }
+    }
+    
+    
+    
+
+    public func isLucky(_ number: Int, completion: @escaping (Bool?) -> Void) {
+        // Check the simple case first: 3, 5 and 8 are automatically lucky.
+        if number == 3 || number == 5 || number == 8 {
+            completion(true)
+            return
+        }
+        // Fetch the current weather from the backend.
+        // If the current temperature, in Farenheit, contains an 8, then that's lucky.
+        //weatherService.getAuthToken()
         
         weatherService.getTemperature { response in
             switch response {
